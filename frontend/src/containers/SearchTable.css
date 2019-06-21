@@ -1,0 +1,12 @@
+.gene-search-container {
+    text-align: left;
+    display: block;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+}
+.gene-search-input {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 240px;
+}
