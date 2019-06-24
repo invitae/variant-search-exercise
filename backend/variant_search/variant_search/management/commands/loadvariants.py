@@ -53,6 +53,6 @@ class Command(BaseCommand):
             try:
                 variant.save()
             except Exception as e:
-                print e
+                print(e)
                 
             line_number = line_number + 1
