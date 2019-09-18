@@ -2,7 +2,7 @@ import React from 'react';
 import SearchTable from './containers/SearchTable';
 import './App.css';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className="App">
       <SearchTable />

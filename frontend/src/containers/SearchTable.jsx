@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 
 import 'antd/dist/antd.css';  // add AntD styles
 import { Input, Table } from 'antd';
-import { SelectValue } from 'antd/lib/select';
 
 import './SearchTable.css';
 
@@ -55,7 +54,7 @@ export default class SearchTable extends Component {
             title: 'More Info',
             dataIndex: 'source',
             key: 'source',
-            render: (text: string, record: any) => {
+            render: (text, record) => {
                 return (
                     <a target='_blank' rel='noopener noreferrer' href={record.url}>{record.source}</a>
                 );
@@ -72,8 +71,8 @@ export default class SearchTable extends Component {
         totalCount: 0,
     };
 
-    processResults = (dataToConvert: Array<any>) => (
-        dataToConvert.map((record: any, index: Number) => (
+    processResults = dataToConvert => (
+        dataToConvert.map((record, index) => (
             {
                 key: index,
                 ...record,
@@ -81,7 +80,7 @@ export default class SearchTable extends Component {
         ))
     )
 
-    async loadDataForPage(pageNumber: Number) {
+    async loadDataForPage(pageNumber) {
         this.setState({
             isLoading: true
         }, async () => {
@@ -102,13 +101,13 @@ export default class SearchTable extends Component {
         await this.loadDataForPage(this.state.currentPage);
     }
 
-    handlePaginationChange = async (newPage: Number) => {
+    handlePaginationChange = async (newPage) => {
         this.setState({
             currentPage: newPage
         }, () => this.loadDataForPage(this.state.currentPage));
     }
 
-    handleSearch = async (e: any) => {
+    handleSearch = async (e) => {
         const searchText = e.target.value
         const response = await fetch(`http://localhost:8000/genes/?geneSuggest=${searchText}`);
         const data = await response.json();
@@ -122,7 +121,7 @@ export default class SearchTable extends Component {
         }
     }
 
-    handleGeneSelect = (value: SelectValue) => {
+    handleGeneSelect = (value) => {
         this.setState({
             geneSearch: value.toString()
         }, () => this.loadDataForPage(this.state.currentPage));
