@@ -1,5 +1,5 @@
 /**
- * Compoent that lets users search for variants by their gene definition.
+ * Component that lets users search for variants by their gene definition.
  */
 import React, { Component } from 'react';
 
