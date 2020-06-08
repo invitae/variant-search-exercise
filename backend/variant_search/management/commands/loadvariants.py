@@ -11,7 +11,7 @@ class Command(BaseCommand):
         EXPECTED_COLUMNS = 23
 
         line_number = 0
-        variants_data = list(csv.reader(open('../../data/variants.tsv', 'rt'), delimiter='\t'))
+        variants_data = list(csv.reader(open('../data/variants.tsv', 'rt'), delimiter='\t'))
 
         for variant_data in variants_data:
             # Skip the header
