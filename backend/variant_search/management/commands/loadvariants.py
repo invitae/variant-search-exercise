@@ -1,8 +1,10 @@
 import csv
 
 from django.core.management.base import BaseCommand, CommandError
+from django.utils.dateparse import parse_datetime
 
 from variant_search.models import Variant
+
 
 class Command(BaseCommand):
     help = 'Generate fixture dataset'
@@ -12,13 +14,14 @@ class Command(BaseCommand):
 
         line_number = 0
         variants_data = list(csv.reader(open('../data/variants.tsv', 'rt'), delimiter='\t'))
+        num_variants = len(variants_data)
 
         for variant_data in variants_data:
             # Skip the header
             if line_number == 0:
                 line_number = line_number + 1
                 continue
-            
+
             # some lines don't have all the columns - in that case, add empty strings
             data_length = len(variant_data)
             if (data_length < EXPECTED_COLUMNS):
@@ -36,8 +39,8 @@ class Command(BaseCommand):
                 reported_classification=variant_data[7],
                 inferred_classification=variant_data[8],
                 source=variant_data[9],
-                last_evaluated=variant_data[10] if len(variant_data[10]) else None,
-                last_updated=variant_data[11] if len(variant_data[11]) else None,
+                last_evaluated=parse_datetime(variant_data[10] + ' UTC') if len(variant_data[10]) else None,
+                last_updated=parse_datetime(variant_data[11] + ' UTC') if len(variant_data[11]) else None,
                 url=variant_data[12],
                 submitter_comment=variant_data[13],
                 assembly=variant_data[14],
@@ -54,5 +57,8 @@ class Command(BaseCommand):
                 variant.save()
             except Exception as e:
                 print(e)
-                
+
+            if (line_number + 1) % 1000 == 0 or (line_number + 1) == num_variants:
+                print('Loaded {} / {} variants'.format(line_number+1, num_variants))
+
             line_number = line_number + 1
