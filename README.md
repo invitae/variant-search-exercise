@@ -1,33 +1,22 @@
-## Setup and run project locally
+## Setup and run the project locally
 
 ### Prerequisites
-The client requires `npm`, and the server requires `python3` to be installed.
+This application requires Git and Docker Desktop to be locally installed.
 
-### Setup and run server
+### Build and launch the application
 
 In a terminal window:
 
-- the server code is in the `backend` directory, so `cd backend`
-- create a new python environment with ``virtualenv --python=`which python3` variant-search-venv``
-- activate the new python virtual environment with `source variant-search-venv/bin/activate`
-- install all the project requirements by running `pip install -r requirements.txt`
-- move into the Django app root with `cd variant_search`
-- setup the database by applying the migrations with `python manage.py migrate --run-syncdb`
-- once the schema is setup, load data by running `python manage.py loadvariants` (this may take a few minutes)
-- after the database is setup, start the server with `python manage.py runserver`
+- First cd to the top project directory. The server code is in the `backend` directory and the client in the `frontend` directory.
+- Build the backend and frontend docker images with `docker-compose build`
+- Start the backend and frontend containers with `docker-compose up` (This initializes and loads the database. It will take ~15 minutes).
 
-That will start the server, with a browsable API running on http://localhost:8000/ .
+### Verify the application is running
 
-### Setup and run client
+- Once the database is finished loading, both the server and client should be running.
+- A browsable API for the server can be accessed on http://localhost:8000/
+- The client application can be accessed on http://localhost:3000/
 
-In another terminal window:
+### Cleaning up
 
-- the client code is in the `frontend` directory, so `cd frontend`
-- install all the dependencies by running `npm install` (this may take a few minutes)
-- then run `npm start`
-
-That will start the client and a browser will open, loading http://localhost:3000/ .
-
-## Project management
-
-You can review the tickets here: https://trello.com/b/2PHSlIGB/variant-search
+- The docker containers can be stopped and cleaned up with `docker-compose down --remove-orphans`
