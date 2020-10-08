@@ -6,7 +6,7 @@ python manage.py migrate
 
 # Load the database
 echo "Loading database"
-python manage.py loadvariants
+python manage.py loadvariants --force
 
 # Start server
 echo "Starting server"
