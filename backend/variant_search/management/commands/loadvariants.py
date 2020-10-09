@@ -6,6 +6,16 @@ from django.utils.dateparse import parse_datetime
 from variant_search.models import Variant
 
 
+def is_variant_data_loaded(force_load):
+    if Variant.objects.exists():
+        if force_load:
+            print(f"Deleting existing variants in database.")
+            Variant.objects.all().delete()
+        else:
+            return True
+    return False
+
+
 class Command(BaseCommand):
     help = 'Generate fixture dataset'
 
@@ -16,20 +26,14 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         EXPECTED_COLUMNS = 23
 
-        line_number = 0
+        if is_variant_data_loaded(options['force']):
+            print('Skipping loadvariants command. Variants already loaded in database.')
+            return
+
         variants_data = list(csv.reader(open('../data/variants.tsv', 'rt'), delimiter='\t'))
         num_variants = len(variants_data)
-        num_existing_variants = Variant.objects.count()
 
-        # Prevent reloading the same data multiple times
-        if num_existing_variants > 0:
-            if options['force']:
-                print(f"Deleting all {num_existing_variants} variants already loaded in database.")
-                Variant.objects.all().delete()
-            else:
-                print(f"Skipping loadvariants command. {num_existing_variants} variants already in database.")
-                return
-
+        line_number = 0
         for variant_data in variants_data:
             # Skip the header
             if line_number == 0:
