@@ -1,21 +1,39 @@
 import csv
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.utils.dateparse import parse_datetime
 
 from variant_search.models import Variant
 
 
+def is_variant_data_loaded(force_load):
+    if Variant.objects.exists():
+        if force_load:
+            print(f"Deleting existing variants in database.")
+            Variant.objects.all().delete()
+        else:
+            return True
+    return False
+
+
 class Command(BaseCommand):
     help = 'Generate fixture dataset'
+
+    def add_arguments(self, parser):
+        parser.add_argument('--force', action='store_true',
+                            help='delete existing variants and then load variant data')
 
     def handle(self, *args, **options):
         EXPECTED_COLUMNS = 23
 
-        line_number = 0
+        if is_variant_data_loaded(options['force']):
+            print('Skipping loadvariants command. Variants already loaded in database.')
+            return
+
         variants_data = list(csv.reader(open('../data/variants.tsv', 'rt'), delimiter='\t'))
         num_variants = len(variants_data)
 
+        line_number = 0
         for variant_data in variants_data:
             # Skip the header
             if line_number == 0:
