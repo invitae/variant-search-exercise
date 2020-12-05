@@ -85,7 +85,7 @@ export default class SearchTable extends Component {
             isLoading: true
         }, async () => {
             const url = this.state.geneSearch ?
-                `http://localhost:8000/variants/?page=${this.state.currentPage}&geneSearch=${this.state.geneSearch}` :
+                `http://localhost:8000/variants/?page=${this.state.currentPage}&search=${this.state.geneSearch}` :
                 `http://localhost:8000/variants/?page=${this.state.currentPage}`;
             const response = await fetch(url);
             const data = await response.json();
