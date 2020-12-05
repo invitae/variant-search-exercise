@@ -78,7 +78,7 @@ export default class SearchTable extends Component {
                 ...record,
             }
         ))
-    )
+    );
 
     async loadDataForPage(pageNumber) {
         this.setState({
@@ -93,7 +93,7 @@ export default class SearchTable extends Component {
                 totalCount: data.count,
                 data: this.processResults(data.results),
                 isLoading: false
-            })
+            });
         });
     }
 
@@ -105,27 +105,27 @@ export default class SearchTable extends Component {
         this.setState({
             currentPage: newPage
         }, () => this.loadDataForPage(this.state.currentPage));
-    }
+    };
 
     handleSearch = async (e) => {
-        const searchText = e.target.value
+        const searchText = e.target.value;
         const response = await fetch(`http://localhost:8000/genes/?geneSuggest=${searchText}`);
         const data = await response.json();
         if (data.results.length === 1) {
-            const { gene } = data.results[0]
+            const { gene } = data.results[0];
             this.setState({
                 geneSearch: gene,
             }, () => this.loadDataForPage(this.state.currentPage));
         } else {
-            this.setState({data:[], totalCount:0})
+            this.setState({data:[], totalCount:0});
         }
-    }
+    };
 
     handleGeneSelect = (value) => {
         this.setState({
             geneSearch: value.toString()
         }, () => this.loadDataForPage(this.state.currentPage));
-    }
+    };
 
     render() {
         return (
