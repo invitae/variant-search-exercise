@@ -2,6 +2,7 @@ from variant_search.models import Variant
 from rest_framework import pagination, viewsets
 from variant_search.serializers import GeneSerializer, VariantSerializer
 
+
 class VariantViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows queries to fetch Variant data.
@@ -16,15 +17,17 @@ class VariantViewSet(viewsets.ModelViewSet):
         """
         Filter by the gene param if set
         """
-        geneSearch = self.request.query_params.get('geneSearch', None)
-        if (geneSearch is not None):
-            return Variant.objects.filter(gene=geneSearch)
+        gene_search = self.request.query_params.get('geneSearch', None)
+        if gene_search is not None:
+            return Variant.objects.filter(gene=gene_search)
 
         return Variant.objects.exclude(gene='')
+
 
 class GeneViewSetPagination(pagination.PageNumberPagination):
     # Return a lot more gene values, since they are small
     page_size = 100
+
 
 class GeneViewSet(viewsets.ModelViewSet):
     """
@@ -42,11 +45,11 @@ class GeneViewSet(viewsets.ModelViewSet):
         """
         Filter by the gene param if set
         """
-        geneSuggest = self.request.query_params.get('geneSuggest', '')
+        gene_suggest = self.request.query_params.get('geneSuggest', '')
         # remove spaces - we want to ignore those results
-        geneSuggest = geneSuggest.strip()
-        if (geneSuggest is not None or len(geneSuggest) > 0):
+        gene_suggest = gene_suggest.strip()
+        if gene_suggest is not None or len(gene_suggest) > 0:
             return Variant.objects.filter(
-                gene__contains=geneSuggest.upper()).values('gene').distinct()
+                gene__contains=gene_suggest.upper()).values('gene').distinct()
 
         return Variant.objects.exclude(gene="").values('gene').distinct()
