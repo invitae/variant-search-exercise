@@ -8,6 +8,6 @@ const App = () => {
       <SearchTable />
     </div>
   );
-}
+};
 
 export default App;
