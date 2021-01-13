@@ -8,6 +8,8 @@ import { Input, Table } from 'antd';
 
 import './SearchTable.css';
 
+const DEFAULT_PAGE = 1;
+
 export default class SearchTable extends Component {
     columns = [
         {
@@ -63,7 +65,7 @@ export default class SearchTable extends Component {
     ];
 
     state = {
-        currentPage: 1,
+        currentPage: DEFAULT_PAGE,
         data: [],
         geneSearch: null,
         geneSuggestions: [],
@@ -85,8 +87,8 @@ export default class SearchTable extends Component {
             isLoading: true
         }, async () => {
             const url = this.state.geneSearch ?
-                `http://localhost:8000/variants/?page=${this.state.currentPage}&search=${this.state.geneSearch}` :
-                `http://localhost:8000/variants/?page=${this.state.currentPage}`;
+                `http://localhost:8000/variants/?page=${pageNumber}&search=${this.state.geneSearch}` :
+                `http://localhost:8000/variants/?page=${pageNumber}`;
             const response = await fetch(url);
             const data = await response.json();
             this.setState({
@@ -97,14 +99,18 @@ export default class SearchTable extends Component {
         });
     }
 
+    async loadDataForCurrentPage() {
+        return this.loadDataForPage(this.state.currentPage)
+    }
+
     async componentDidMount() {
-        await this.loadDataForPage(this.state.currentPage);
+        await this.loadDataForCurrentPage();
     }
 
     handlePaginationChange = async (newPage) => {
         this.setState({
             currentPage: newPage
-        }, () => this.loadDataForPage(this.state.currentPage));
+        }, () => this.loadDataForCurrentPage());
     };
 
     handleSearch = async (e) => {
@@ -114,17 +120,12 @@ export default class SearchTable extends Component {
         if (data.results.length === 1) {
             const { gene } = data.results[0];
             this.setState({
+                currentPage: DEFAULT_PAGE,
                 geneSearch: gene,
-            }, () => this.loadDataForPage(this.state.currentPage));
+            }, () => this.loadDataForCurrentPage());
         } else {
             this.setState({data:[], totalCount:0});
         }
-    };
-
-    handleGeneSelect = (value) => {
-        this.setState({
-            geneSearch: value.toString()
-        }, () => this.loadDataForPage(this.state.currentPage));
     };
 
     render() {
@@ -143,7 +144,8 @@ export default class SearchTable extends Component {
                     pagination={{
                         pageSize: 15,
                         total: this.state.totalCount,
-                        onChange: this.handlePaginationChange
+                        onChange: this.handlePaginationChange,
+                        current: this.state.currentPage
                     }}
                 />
             </div>
