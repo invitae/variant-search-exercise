@@ -12,6 +12,14 @@ In a terminal window:
 - Start the backend `docker-compose up backend`
 - In another terminal, start the frontend `docker-compose up frontend`
 
+If you're interested in picking up Kafka tasks, please use https://github.com/confluentinc/cp-all-in-one
+#### example
+```shell
+$ curl --silent --output docker-compose-kafka.yml https://raw.githubusercontent.com/confluentinc/cp-all-in-one/6.2.0-post/cp-all-in-one/docker-compose.yml
+$ docker-compose -f docker-compose-with-kafka.yml
+```
+should get you set up with local `kafka` stack. 
+
 ### Verify the application is running
 
 - Once the database is finished loading, both the server and client should be running.
