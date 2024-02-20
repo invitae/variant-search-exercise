@@ -1,6 +1,11 @@
+from typing import TYPE_CHECKING
+
 from variant_search.models import Variant
 from rest_framework import pagination, viewsets, filters
 from variant_search.serializers import GeneSerializer, VariantSerializer
+
+if TYPE_CHECKING:
+    from django.db.models import QuerySet
 
 
 class VariantViewSet(viewsets.ModelViewSet):
@@ -33,7 +38,7 @@ class GeneViewSet(viewsets.ModelViewSet):
     # Return a lot more gene values, since they are small
     pagination_class = GeneViewSetPagination
 
-    def get_queryset(self):
+    def get_queryset(self) -> "QuerySet":
         """
         Filter by the gene param if set
         """
