@@ -1,12 +1,16 @@
 import csv
+from typing import TYPE_CHECKING
 
 from django.core.management.base import BaseCommand
 from django.utils.dateparse import parse_datetime
 
 from variant_search.models import Variant
 
+if TYPE_CHECKING:
+    from argparse import ArgumentParser
 
-def is_variant_data_loaded(force_load):
+
+def is_variant_data_loaded(force_load: bool) -> bool:
     if Variant.objects.exists():
         if force_load:
             print(f"Deleting existing variants in database.")
@@ -19,12 +23,12 @@ def is_variant_data_loaded(force_load):
 class Command(BaseCommand):
     help = 'Generate fixture dataset'
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: "ArgumentParser"):
         parser.add_argument('--force', action='store_true',
                             help='delete existing variants and then load variant data')
 
     def handle(self, *args, **options):
-        EXPECTED_COLUMNS = 23
+        expected_columns = 23
 
         if is_variant_data_loaded(options['force']):
             print('Skipping loadvariants command. Variants already loaded in database.')
@@ -42,8 +46,8 @@ class Command(BaseCommand):
 
             # some lines don't have all the columns - in that case, add empty strings
             data_length = len(variant_data)
-            if (data_length < EXPECTED_COLUMNS):
-                for i in range(EXPECTED_COLUMNS - data_length):
+            if (data_length < expected_columns):
+                for i in range(expected_columns - data_length):
                     variant_data.append('')
 
             variant = Variant(
