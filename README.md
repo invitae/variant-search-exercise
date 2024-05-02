@@ -1,23 +1,24 @@
 ## Setup and run the project locally
 
 ### Prerequisites
-This application requires Git and [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/) to be locally installed.
+[Docker](https://docs.docker.com/engine/install/) is recommended to be locally installed to set the project up.
+
+However, you can set up the frontend and backend by hand without Docker if you are familiar with installing and building with python & npm (not covered in this readme).
 
 
 ### Build and launch the application
 
 In a terminal window:
 
-- First cd to the top project directory. The server code is in the `backend` directory and the client in the `frontend` directory.
-- Build the backend and frontend docker images with `nerdctl compose build`
-- Start the backend `nerdctl compose up backend`
-- In another terminal, start the frontend `nerdctl compose up frontend`
+- First `cd` to the top project directory. The server code is in the `backend` directory and the client in the `frontend` directory.
+- Build the backend and frontend docker images with `docker compose build`
+- Start the app with `docker compose up`
 
 If you're interested in picking up Kafka tasks, please use https://github.com/confluentinc/cp-all-in-one
 #### example
 ```shell
 $ curl --silent --output docker-compose-with-kafka.yml https://raw.githubusercontent.com/confluentinc/cp-all-in-one/6.2.0-post/cp-all-in-one/docker-compose.yml
-$ nerdctl compose -f docker-compose-with-kafka.yml up
+$ docker compose -f docker-compose-with-kafka.yml up
 ```
 should get you set up with local `kafka` stack. 
 
@@ -29,4 +30,5 @@ should get you set up with local `kafka` stack.
 
 ### Cleaning up
 
-- The docker containers can be stopped and cleaned up with `nerdctl compose down --remove-orphans`
+- Stop the docker containers by issuing ctrl+C in the terminal running `compose up` from earlier step.
+- Clean up the installation by running `docker compose down -v --remove-orphans`
