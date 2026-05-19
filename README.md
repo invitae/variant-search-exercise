@@ -14,6 +14,14 @@ In a terminal window:
 - Build the backend and frontend docker images with `docker compose build`
 - Start the app with `docker compose up`
 
+If you're interested in picking up **Spark / data engineering tasks**, start the Jupyter environment:
+
+```shell
+export UID && docker compose up spark
+```
+
+Then open http://localhost:8888 and enter token `variant-exercise`. The `work/` directory is where task notebooks will appear. You can create new notebooks freely — they persist in `spark/notebooks/` on the host and any Parquet output lands in `spark/output/`.
+
 If you're interested in picking up Kafka tasks, please use https://github.com/confluentinc/cp-all-in-one
 #### example
 ```shell

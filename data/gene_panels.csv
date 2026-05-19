@@ -1,0 +1,63 @@
+gene,panel,category
+BRCA1,Hereditary Breast and Ovarian Cancer,Cancer
+BRCA2,Hereditary Breast and Ovarian Cancer,Cancer
+TP53,Hereditary Breast and Ovarian Cancer,Cancer
+PTEN,Hereditary Breast and Ovarian Cancer,Cancer
+ATM,Hereditary Breast and Ovarian Cancer,Cancer
+CHEK2,Hereditary Breast and Ovarian Cancer,Cancer
+PALB2,Hereditary Breast and Ovarian Cancer,Cancer
+TP53,Li-Fraumeni Syndrome,Cancer
+ATM,Li-Fraumeni Syndrome,Cancer
+CHEK2,Li-Fraumeni Syndrome,Cancer
+RB1,Li-Fraumeni Syndrome,Cancer
+MLH1,Lynch Syndrome,Cancer
+MSH2,Lynch Syndrome,Cancer
+MSH6,Lynch Syndrome,Cancer
+PMS2,Lynch Syndrome,Cancer
+APC,Lynch Syndrome,Cancer
+PTCH1,Basal Cell Nevus Syndrome,Cancer
+MYH7,Cardiomyopathy,Cardiac
+MYBPC3,Cardiomyopathy,Cardiac
+TTN,Cardiomyopathy,Cardiac
+SCN5A,Cardiomyopathy,Cardiac
+RYR2,Cardiomyopathy,Cardiac
+DSP,Cardiomyopathy,Cardiac
+LMNA,Cardiomyopathy,Cardiac
+ACTC1,Cardiomyopathy,Cardiac
+CDH23,Hereditary Hearing Loss,Sensory
+OTOF,Hereditary Hearing Loss,Sensory
+USH2A,Hereditary Hearing Loss,Sensory
+ADGRV1,Hereditary Hearing Loss,Sensory
+GJB2,Hereditary Hearing Loss,Sensory
+SLC26A4,Hereditary Hearing Loss,Sensory
+USH2A,Usher Syndrome,Sensory
+ADGRV1,Usher Syndrome,Sensory
+CDH23,Usher Syndrome,Sensory
+TSC1,Tuberous Sclerosis,Neurology
+TSC2,Tuberous Sclerosis,Neurology
+TSC1,Epilepsy,Neurology
+TSC2,Epilepsy,Neurology
+SCN1A,Epilepsy,Neurology
+KCNQ2,Epilepsy,Neurology
+FBN1,Marfan and Related Disorders,Connective Tissue
+ELN,Marfan and Related Disorders,Connective Tissue
+COL3A1,Marfan and Related Disorders,Connective Tissue
+TGFBR1,Marfan and Related Disorders,Connective Tissue
+DMD,Muscular Dystrophy,Neuromuscular
+RYR1,Congenital Myopathy,Neuromuscular
+ANO5,Limb-Girdle Muscular Dystrophy,Neuromuscular
+DYSF,Limb-Girdle Muscular Dystrophy,Neuromuscular
+KMT2D,Developmental Delay,Developmental
+NIPBL,Developmental Delay,Developmental
+GATA3,Developmental Delay,Developmental
+ASPM,Developmental Delay,Developmental
+PCNT,Developmental Delay,Developmental
+F8,Coagulation Disorders,Hematology
+F7,Coagulation Disorders,Hematology
+F9,Coagulation Disorders,Hematology
+BTK,Immunodeficiency,Immunology
+RAG1,Immunodeficiency,Immunology
+ADA,Immunodeficiency,Immunology
+HMBS,Acute Intermittent Porphyria,Metabolic
+ACADM,Fatty Acid Oxidation Disorders,Metabolic
+ACADVL,Fatty Acid Oxidation Disorders,Metabolic
