@@ -17,7 +17,7 @@ In a terminal window:
 If you're interested in picking up **Spark / data engineering tasks**, start the Jupyter environment:
 
 ```shell
-export UID && docker compose up spark
+export UID && docker compose -f docker-compose.spark.yml up
 ```
 
 Then open http://localhost:8888 and enter token `variant-exercise`. The `work/` directory is where task notebooks will appear. You can create new notebooks freely — they persist in `spark/notebooks/` on the host and any Parquet output lands in `spark/output/`.

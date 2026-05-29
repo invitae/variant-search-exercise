@@ -19,21 +19,6 @@ services:
       - "3000:3000"
     restart: on-failure
 
-  spark:
-    build: ./spark
-    user: root
-    ports:
-      - "8888:8888"
-    volumes:
-      - ./data:/home/jovyan/data:ro
-      - ./spark/notebooks:/home/jovyan/work
-      - ./spark/output:/home/jovyan/output
-      - ./spark/solutions:/home/jovyan/solutions:ro
-    environment:
-      - NB_UID=${UID}
-      - CHOWN_HOME=yes
-      - JUPYTER_ENABLE_LAB=yes
-      - JUPYTER_TOKEN=variant-exercise
 
 volumes:
   node-modules:
