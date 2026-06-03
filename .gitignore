@@ -4,3 +4,10 @@ node_modules
 *.pyc
 .idea
 venv
+
+# Spark notebooks are shared at interview time, not included in the candidate repo
+spark/notebooks/*.ipynb
+!spark/notebooks/setup_check.ipynb
+spark/notebooks/.ipynb_checkpoints/
+spark/solutions/*.ipynb
+spark/output/
